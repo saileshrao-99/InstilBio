@@ -1,0 +1,17 @@
+{
+	"name": "OnPremFileSystem",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "FileServer",
+		"typeProperties": {
+			"host": "C:/Users/saile/OneDrive/Documents/Projects/InstilBio",
+			"userId": "sailesh.chennam@outlook.com",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiI0NmUxOWM2OC0zNDEzLTQ2NTYtOTRlMS01Y2IxMzViYTQ5NjAiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "InstilBio-OnPremIR",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

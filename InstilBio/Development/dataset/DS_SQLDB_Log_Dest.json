@@ -1,0 +1,17 @@
+{
+	"name": "DS_SQLDB_Log_Dest",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_SQLDB_IB_Log",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "logging",
+			"table": "EtlLog"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

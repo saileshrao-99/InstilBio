@@ -1,0 +1,9 @@
+{
+	"name": "ADF-Pipeline-01",
+	"location": "southcentralus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "bebfe380-6025-40ad-980f-bb2fe83c8762",
+		"tenantId": "96e4c5af-d96a-498a-9ff8-622c5c74bcd6"
+	}
+}

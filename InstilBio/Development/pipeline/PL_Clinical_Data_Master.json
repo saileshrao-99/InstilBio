@@ -1,0 +1,287 @@
+{
+	"name": "PL_Clinical_Data_Master",
+	"properties": {
+		"activities": [
+			{
+				"name": "Execute Master Pipeline",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "LKP Insert ADF Log",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "PL_Clinical_Data_SubMaster",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "Pipeline Successful",
+				"type": "WebActivity",
+				"dependsOn": [
+					{
+						"activity": "SP Update ADF Log OnSuccess",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": "https://prod-06.southcentralus.logic.azure.com:443/workflows/5e7889305416455b9039a1d7627b81d6/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=KD1QaAxoFYyBLXV4YmmuiAjSqoVJW0LdbgGDGbL7tMU",
+					"method": "POST",
+					"body": {
+						"value": "{\n\"Title\":\"Pipeline Successful\",\n\"Message\":\"Execute Master Pipeline Completed\",\n\"Color\":\"Green\",\n\"DataFactoryName\":\"@{pipeline().DataFactory}\",\n\"PipelineName\":\"@{pipeline().Pipeline}\",\n\"PipelineRunId\":\"@{pipeline().RunId}\",\n\"Time\":\"@{utcnow()}\",\n}",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Pipeline Failed",
+				"type": "WebActivity",
+				"dependsOn": [
+					{
+						"activity": "Execute Master Pipeline",
+						"dependencyConditions": [
+							"Failed"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": "https://prod-06.southcentralus.logic.azure.com:443/workflows/5e7889305416455b9039a1d7627b81d6/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=KD1QaAxoFYyBLXV4YmmuiAjSqoVJW0LdbgGDGbL7tMU",
+					"method": "POST",
+					"body": {
+						"value": "{\n\"Title\":\"Pipeline Failed\",\n\"Message\":\"@{activity('Execute Master Pipeline').error.message}\",\n\"Color\":\"Red\",\n\"DataFactoryName\":\"@{pipeline().DataFactory}\",\n\"PipelineName\":\"@{pipeline().Pipeline}\",\n\"PipelineRunId\":\"@{pipeline().RunId}\",\n\"Time\":\"@{utcnow()}\",\n}",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "LKP Insert ADF Log",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderStoredProcedureName": "[logging].[usp_InsertEtlLog]",
+						"storedProcedureParameters": {
+							"ComponentName": {
+								"type": "String",
+								"value": {
+									"value": "Execute Master Package",
+									"type": "Expression"
+								}
+							},
+							"Deletes": {
+								"type": "Int32",
+								"value": null
+							},
+							"DurationSeconds": {
+								"type": "Int32",
+								"value": null
+							},
+							"EndTime": {
+								"type": "DateTime",
+								"value": null
+							},
+							"ErrorMessage": {
+								"type": "String",
+								"value": null
+							},
+							"Inserts": {
+								"type": "Int32",
+								"value": null
+							},
+							"PipelineName": {
+								"type": "String",
+								"value": {
+									"value": "@pipeline().Pipeline",
+									"type": "Expression"
+								}
+							},
+							"StartTime": {
+								"type": "DateTime",
+								"value": {
+									"value": "@utcnow()",
+									"type": "Expression"
+								}
+							},
+							"Updates": {
+								"type": "Int32",
+								"value": null
+							}
+						},
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "DS_SQLDB_Log_Dest",
+						"type": "DatasetReference"
+					}
+				}
+			},
+			{
+				"name": "SP Update ADF Log OnSuccess",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "Execute Master Pipeline",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[logging].[usp_UpdateEtlLog]",
+					"storedProcedureParameters": {
+						"Deletes": {
+							"value": null,
+							"type": "Int32"
+						},
+						"DurationSeconds": {
+							"value": null,
+							"type": "Int32"
+						},
+						"EndTime": {
+							"value": {
+								"value": "@utcnow()",
+								"type": "Expression"
+							},
+							"type": "DateTime"
+						},
+						"ErrorMessage": {
+							"value": null,
+							"type": "String"
+						},
+						"EtlLogId": {
+							"value": {
+								"value": "@activity('LKP Insert ADF Log').output.firstRow.EtlLogId",
+								"type": "Expression"
+							},
+							"type": "Int32"
+						},
+						"Inserts": {
+							"value": null,
+							"type": "Int32"
+						},
+						"Updates": {
+							"value": null,
+							"type": "Int32"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "LS_SQLDB_IB_Log",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "SP Update ADF Log OnFailure",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "Execute Master Pipeline",
+						"dependencyConditions": [
+							"Failed"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[logging].[usp_UpdateEtlLog]",
+					"storedProcedureParameters": {
+						"Deletes": {
+							"value": null,
+							"type": "Int32"
+						},
+						"DurationSeconds": {
+							"value": null,
+							"type": "Int32"
+						},
+						"EndTime": {
+							"value": {
+								"value": "@utcnow()",
+								"type": "Expression"
+							},
+							"type": "DateTime"
+						},
+						"ErrorMessage": {
+							"value": {
+								"value": "@{activity('Execute Master Pipeline').error.message}",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"EtlLogId": {
+							"value": {
+								"value": "@activity('LKP Insert ADF Log').output.firstRow.EtlLogId",
+								"type": "Expression"
+							},
+							"type": "Int32"
+						},
+						"Inserts": {
+							"value": null,
+							"type": "Int32"
+						},
+						"Updates": {
+							"value": null,
+							"type": "Int32"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "LS_SQLDB_IB_Log",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2021-04-10T23:47:00Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

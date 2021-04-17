@@ -1,0 +1,6 @@
+{
+	"name": "InstilBio-OnPremIR",
+	"properties": {
+		"type": "SelfHosted"
+	}
+}

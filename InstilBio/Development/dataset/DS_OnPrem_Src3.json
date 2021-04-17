@@ -1,0 +1,240 @@
+{
+	"name": "DS_OnPrem_Src3",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "OnPremFileSystem",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "FileServerLocation",
+				"folderPath": "clinical_ds_src3"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "state_code",
+				"type": "String"
+			},
+			{
+				"name": "district_code",
+				"type": "String"
+			},
+			{
+				"name": "rural_urban",
+				"type": "String"
+			},
+			{
+				"name": "stratum",
+				"type": "String"
+			},
+			{
+				"name": "psu_id",
+				"type": "String"
+			},
+			{
+				"name": "ahs_house_unit",
+				"type": "String"
+			},
+			{
+				"name": "house_hold_no",
+				"type": "String"
+			},
+			{
+				"name": "date_survey",
+				"type": "String"
+			},
+			{
+				"name": "test_salt_iodine",
+				"type": "String"
+			},
+			{
+				"name": "record_code_iodine",
+				"type": "String"
+			},
+			{
+				"name": "record_code_iodine_reason",
+				"type": "String"
+			},
+			{
+				"name": "sl_no",
+				"type": "String"
+			},
+			{
+				"name": "sex",
+				"type": "String"
+			},
+			{
+				"name": "usual_residance",
+				"type": "String"
+			},
+			{
+				"name": "usual_residance_reason",
+				"type": "String"
+			},
+			{
+				"name": "identification_code",
+				"type": "String"
+			},
+			{
+				"name": "age_code",
+				"type": "String"
+			},
+			{
+				"name": "age",
+				"type": "String"
+			},
+			{
+				"name": "date_of_birth",
+				"type": "String"
+			},
+			{
+				"name": "month_of_birth",
+				"type": "String"
+			},
+			{
+				"name": "year_of_birth",
+				"type": "String"
+			},
+			{
+				"name": "weight_measured",
+				"type": "String"
+			},
+			{
+				"name": "weight_in_kg",
+				"type": "String"
+			},
+			{
+				"name": "length_height_measured",
+				"type": "String"
+			},
+			{
+				"name": "length_height_code",
+				"type": "String"
+			},
+			{
+				"name": "length_height_cm",
+				"type": "String"
+			},
+			{
+				"name": "haemoglobin_test",
+				"type": "String"
+			},
+			{
+				"name": "haemoglobin",
+				"type": "String"
+			},
+			{
+				"name": "haemoglobin_level",
+				"type": "String"
+			},
+			{
+				"name": "bp_systolic",
+				"type": "String"
+			},
+			{
+				"name": "bp_systolic_2_reading",
+				"type": "String"
+			},
+			{
+				"name": "bp_diastolic",
+				"type": "String"
+			},
+			{
+				"name": "bp_diastolic_2reading",
+				"type": "String"
+			},
+			{
+				"name": "pulse_rate",
+				"type": "String"
+			},
+			{
+				"name": "pulse_rate_2_reading",
+				"type": "String"
+			},
+			{
+				"name": "diabetes_test",
+				"type": "String"
+			},
+			{
+				"name": "fasting_blood_glucose",
+				"type": "String"
+			},
+			{
+				"name": "fasting_blood_glucose_mg_dl",
+				"type": "String"
+			},
+			{
+				"name": "marital_status",
+				"type": "String"
+			},
+			{
+				"name": "gauna_perfor_not_perfor",
+				"type": "String"
+			},
+			{
+				"name": "duration_pregnanacy",
+				"type": "String"
+			},
+			{
+				"name": "first_breast_feeding",
+				"type": "String"
+			},
+			{
+				"name": "is_cur_breast_feeding",
+				"type": "String"
+			},
+			{
+				"name": "day_or_month_for_breast_feeding_",
+				"type": "String"
+			},
+			{
+				"name": "day_or_month_for_breast_feeding",
+				"type": "String"
+			},
+			{
+				"name": "water_month",
+				"type": "String"
+			},
+			{
+				"name": "ani_milk_month",
+				"type": "String"
+			},
+			{
+				"name": "semisolid_month_or_day",
+				"type": "String"
+			},
+			{
+				"name": "solid_month",
+				"type": "String"
+			},
+			{
+				"name": "vegetables_month_or_day",
+				"type": "String"
+			},
+			{
+				"name": "illness_type",
+				"type": "String"
+			},
+			{
+				"name": "illness_duration",
+				"type": "String"
+			},
+			{
+				"name": "treatment_type",
+				"type": "String"
+			},
+			{
+				"name": "v54",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
