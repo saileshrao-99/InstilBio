@@ -7,7 +7,7 @@
 				"type": "ExecutePipeline",
 				"dependsOn": [
 					{
-						"activity": "LKP Insert ADF Log",
+						"activity": "LKP Insert ADF",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -79,7 +79,7 @@
 				}
 			},
 			{
-				"name": "LKP Insert ADF Log",
+				"name": "LKP Insert ADF",
 				"type": "Lookup",
 				"dependsOn": [],
 				"policy": {
