@@ -55,7 +55,7 @@
 					},
 					"activities": [
 						{
-							"name": "Copy Activity",
+							"name": "Copy data1",
 							"type": "Copy",
 							"dependsOn": [],
 							"policy": {
@@ -72,17 +72,12 @@
 									"storeSettings": {
 										"type": "AzureBlobStorageReadSettings",
 										"recursive": true,
-										"wildcardFileName": {
-											"value": "@item().name",
-											"type": "Expression"
-										},
 										"deleteFilesAfterCompletion": false
 									},
 									"formatSettings": {
 										"type": "BinaryReadSettings",
 										"compressionProperties": {
-											"type": "ZipDeflateReadSettings",
-											"preserveZipFileNameAsFolder": false
+											"type": "ZipDeflateReadSettings"
 										}
 									}
 								},
