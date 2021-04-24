@@ -1,5 +1,5 @@
 {
-	"name": "PL_Clinical_Data_Src1",
+	"name": "PL_Clinical_Data_OnPremToSA",
 	"properties": {
 		"activities": [
 			{
@@ -16,7 +16,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataset": {
-						"referenceName": "DS_OnPrem_Src1",
+						"referenceName": "DS_OnPrem_SrcZip",
 						"type": "DatasetReference"
 					},
 					"fieldList": [
@@ -68,7 +68,6 @@
 									"storeSettings": {
 										"type": "FileServerReadSettings",
 										"recursive": true,
-										"wildcardFolderPath": "clinical_ds_src1",
 										"wildcardFileName": {
 											"value": "@item().name",
 											"type": "Expression"
@@ -76,7 +75,10 @@
 										"enablePartitionDiscovery": false
 									},
 									"formatSettings": {
-										"type": "DelimitedTextReadSettings"
+										"type": "DelimitedTextReadSettings",
+										"compressionProperties": {
+											"type": "ZipDeflateReadSettings"
+										}
 									}
 								},
 								"sink": {
@@ -102,13 +104,13 @@
 							},
 							"inputs": [
 								{
-									"referenceName": "DS_OnPrem_Src1",
+									"referenceName": "DS_OnPrem_SrcZip",
 									"type": "DatasetReference"
 								}
 							],
 							"outputs": [
 								{
-									"referenceName": "DS_AzureBlob_Dest",
+									"referenceName": "DS_AzureBlob_Dest_RawZip",
 									"type": "DatasetReference"
 								}
 							]

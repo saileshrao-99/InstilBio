@@ -1,5 +1,5 @@
 {
-	"name": "DS_AzureBlob_Dest",
+	"name": "DS_AzureBlob_Dest_RawZip",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "LS_Dest_AzureFiles",
