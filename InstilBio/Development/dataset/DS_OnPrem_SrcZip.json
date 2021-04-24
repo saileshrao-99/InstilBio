@@ -1,5 +1,5 @@
 {
-	"name": "DS_OnPrem_Src1",
+	"name": "DS_OnPrem_SrcZip",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "OnPremFileSystem",
