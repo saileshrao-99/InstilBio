@@ -1,0 +1,17 @@
+{
+	"name": "DS_SA_Src_RawUnZip",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_Dest_AzureFiles",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"container": "raw-unzip"
+			}
+		}
+	}
+}
