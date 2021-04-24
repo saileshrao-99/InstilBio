@@ -10,7 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "@dataset.filename",
+				"fileName": "@dataset().filename",
 				"container": "raw-zip"
 			},
 			"compression": {
