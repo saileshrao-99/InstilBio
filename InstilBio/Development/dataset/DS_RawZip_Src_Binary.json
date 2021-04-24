@@ -1,0 +1,20 @@
+{
+	"name": "DS_RawZip_Src_Binary",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_Dest_AzureFiles",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"container": "raw-zip"
+			},
+			"compression": {
+				"type": "ZipDeflate"
+			}
+		}
+	}
+}
