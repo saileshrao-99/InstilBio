@@ -16,7 +16,7 @@
 			"location": {
 				"type": "AzureBlobStorageLocation",
 				"fileName": "@dataset().filename",
-				"container": "raw-zip"
+				"folderPath": "raw-zip"
 			},
 			"compression": {
 				"type": "ZipDeflate",
